@@ -1,0 +1,16 @@
+{
+  "name": "package-sync",
+  "main": "./lib/package-sync",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A short description of your package",
+  "activationEvents": ["package-sync:toggle"],
+  "repository": "https://github.com/atom/package-sync",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+    "season": "~1.0"
+  }
+}

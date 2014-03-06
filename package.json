@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "private": true,
   "description": "A short description of your package",
-  "activationEvents": ["package-sync:toggle"],
-  "repository": "https://github.com/atom/package-sync",
+  "activationEvents": ["package-sync:sync"],
+  "repository": "https://github.com/lee-dohm/package-sync",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"

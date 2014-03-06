@@ -1,10 +1,12 @@
 {
   "name": "package-sync",
   "main": "./lib/package-sync",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "A short description of your package",
-  "activationEvents": ["package-sync:sync"],
+  "activationEvents": [
+    "package-sync:sync"
+  ],
   "repository": "https://github.com/lee-dohm/package-sync",
   "license": "MIT",
   "engines": {

@@ -2,8 +2,7 @@
   "name": "package-sync",
   "main": "./lib/package-sync",
   "version": "0.0.2",
-  "private": true,
-  "description": "A short description of your package",
+  "description": "Synchronizes packages installed between computers",
   "activationEvents": [
     "package-sync:sync"
   ],

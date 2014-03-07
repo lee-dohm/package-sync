@@ -7,7 +7,7 @@ fs = require 'fs'
 os = require 'os'
 path = require 'path'
 
-# Public: Module of helper methods for tests.
+# Module of helper methods for tests.
 class Helpers
   createPackages: (packages, packagesPath = @getPackagesPath()) ->
     CSON.writeFileSync(packagesPath, packages)

@@ -6,18 +6,15 @@ CSON = require 'season'
 fs = require 'fs'
 path = require 'path'
 
-module.exports =
-# Public: Represents the list of packages that the user wants synchronized.
+# Represents the list of packages that the user wants synchronized.
 class PackageList
-  # Public: Creates a new instance of the {PackageList} class.
-  #
-  # Returns a {PackageList}.
+  # Creates a new instance of the `PackageList` class.
   constructor: ->
     @configDirPath = atom.getConfigDirPath()
 
-  # Public: Gets the list of packages that the user wants synchronized.
+  # Gets the list of packages that the user wants synchronized.
   #
-  # Returns an {Array} of names of packages.
+  # @return [Array] List of names of packages.
   getPackages: ->
     configPath = path.join(@configDirPath, 'packages.cson')
     if fs.existsSync(configPath)
@@ -25,3 +22,5 @@ class PackageList
       obj['packages']
     else
       []
+
+module.exports = PackageList

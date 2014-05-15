@@ -6,35 +6,33 @@
 
 PackageList = require './package-list'
 
-# Performs the package synchronization.
+# Public: Performs the package synchronization.
 class PackageSync
   # Path to `apm`.
   apmPath = atom.packages.getApmPath()
 
-  # Activates `PackageSync`.
+  # Public: Activates the `Package Sync` package.
   activate: ->
     atom.workspaceView.command 'package-sync:sync', => @sync()
 
-  # Installs any packages that are missing from the `packages.cson` configuration file.
+  # Public: Installs any packages that are missing from the `packages.cson` configuration file.
   sync: ->
     console.log('Synchronize packages')
     missing = @getMissingPackages()
     @installPackages(missing)
 
-  # Gets the list of packages that are missing.
+  # Internal: Gets the list of packages that are missing.
   #
-  # @return [Array] List of names of packages that need to be installed.
-  # @private
+  # Returns an {Array} of names of packages that need to be installed.
   getMissingPackages: ->
     list = new PackageList
     syncPackages = list.getPackages()
     availablePackages = atom.packages.getAvailablePackageNames()
     value for value in syncPackages when value not in availablePackages
 
-  # Installs the named package.
+  # Internal: Installs the named package.
   #
-  # @param [String] pkg Name of the package to install.
-  # @private
+  # pkg - {String} containing the name of the package to install.
   installPackage: (pkg) ->
     console.log("Install #{pkg}")
     command = apmPath
@@ -44,10 +42,9 @@ class PackageSync
     exit = (exitCode) -> console.log("apm install #{pkg} exited with code #{exitCode}")
     new BufferedProcess({command, args, stdout, stderr, exit})
 
-  # Installs each of the packages in the given list.
+  # Internal: Installs each of the packages in the given list.
   #
-  # @param [Array<String>] List of names of packages to install.
-  # @private
+  # packages - An {Array} containing the names of packages to install.
   installPackages: (packages) ->
     @installPackage(pkg) for pkg in packages
 

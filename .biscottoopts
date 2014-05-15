@@ -1,5 +1,6 @@
 --name "Package Sync"
 --title "Package Sync Documentation"
+--internal
 --quiet
 ./lib
 -

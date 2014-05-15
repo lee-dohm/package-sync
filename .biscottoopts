@@ -1,5 +1,4 @@
 --name "Package Sync"
---readme README.md
 --title "Package Sync Documentation"
 --quiet
 ./lib

@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lee-dohm/package-sync.svg?branch=master)](https://travis-ci.org/lee-dohm/package-sync)
+
 # Package Sync for Atom
 
 Synchronizes packages installed between computers.

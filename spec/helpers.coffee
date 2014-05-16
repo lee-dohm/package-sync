@@ -8,7 +8,7 @@ os = require 'os'
 path = require 'path'
 
 # Module of helper methods for tests.
-class Helpers
+module.exports =
   createPackages: (packages, packagesPath = @getPackagesPath()) ->
     CSON.writeFileSync(packagesPath, packages)
 
@@ -18,5 +18,3 @@ class Helpers
 
   getPackagesPath: ->
     path.join(os.tmpdir(), 'packages.cson')
-
-module.exports = new Helpers

@@ -7,6 +7,11 @@ fs = require 'fs'
 path = require 'path'
 
 # Public: Represents the list of packages that the user wants synchronized.
+#
+# ## Events
+#
+# This class has no events.
+module.exports =
 class PackageList
   # Public: Creates a new instance of the `PackageList` class.
   constructor: ->
@@ -22,5 +27,3 @@ class PackageList
       obj['packages']
     else
       []
-
-module.exports = PackageList

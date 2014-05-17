@@ -26,4 +26,4 @@ Where the contents of the array is a list of packages to ensure are installed.
 
 ## Copyright
 
-Copyright &copy; 2014 by [Lee Dohm](http://www.lee-dohm.com), [Lifted Studios](http://www.liftedstudios.com). See the [LICENSE](https://github.com/lee-dohm/package-sync/LICENSE.md) for more details.
+Copyright &copy; 2014 by [Lee Dohm](http://www.lee-dohm.com), [Lifted Studios](http://www.liftedstudios.com). See the [LICENSE](https://github.com/lee-dohm/package-sync/blob/master/LICENSE.md) for more details.

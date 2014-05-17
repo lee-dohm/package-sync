@@ -22,9 +22,10 @@ class PackageSync
   # Internal: Packages in the process of being installed.
   packagesToInstall: []
 
-  # Public: Activates the `Package Sync` package.
-  activate: ->
-    atom.workspaceView.command 'package-sync:sync', => @sync()
+  # Public: Creates the package list for the user from the list of available packages.
+  createPackageList: ->
+    console.log('Create package list')
+    new PackageList().setPackages()
 
   # Public: Installs any packages that are missing from the `packages.cson` configuration file.
   sync: ->

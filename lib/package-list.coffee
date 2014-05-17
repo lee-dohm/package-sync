@@ -21,9 +21,19 @@ class PackageList
   #
   # Returns an {Array} containing the package names.
   getPackages: ->
-    configPath = path.join(@configDirPath, 'packages.cson')
-    if fs.existsSync(configPath)
-      obj = CSON.readFileSync(configPath)
+    if fs.existsSync(@getConfigPath())
+      obj = CSON.readFileSync(@getConfigPath())
       obj['packages']
     else
       []
+
+  # Public: Sets the list of packages to the list of available packages.
+  setPackages: ->
+    unless fs.existsSync(@getConfigPath())
+      CSON.writeFileSync(@getConfigPath(), {'packages': atom.packages.getAvailablePackageNames()})
+
+  # Internal: Gets the path to the package list.
+  #
+  # Returns a {String} containing the path to the list of available packages.
+  getConfigPath: ->
+    path.join(@configDirPath, 'packages.cson')

@@ -21,13 +21,33 @@ describe 'PackageList', ->
   afterEach ->
     h.deletePackages()
 
-  it 'gives an empty array when there is not a packages.cson', ->
-    expect(list.getPackages()).toEqual([])
+  describe 'getPackages', ->
+    it 'gives an empty array when there is not a packages.cson', ->
+      expect(list.getPackages()).toEqual([])
 
-  it 'gives an empty array when there is an empty packages.cson', ->
-    h.createPackages({'packages': []})
-    expect(list.getPackages()).toEqual([])
+    it 'gives an empty array when there is an empty packages.cson', ->
+      h.createPackages({'packages': []})
+      expect(list.getPackages()).toEqual([])
 
-  it 'gives the packages list when there is a non-zero packages.cson', ->
-    h.createPackages({'packages': ['foo', 'bar', 'baz']})
-    expect(list.getPackages()).toEqual(['foo', 'bar', 'baz'])
+    it 'gives the packages list when there is a non-zero packages.cson', ->
+      h.createPackages({'packages': ['foo', 'bar', 'baz']})
+      expect(list.getPackages()).toEqual(['foo', 'bar', 'baz'])
+
+  describe 'setPackages', ->
+    it 'creates the packages.cson if it does not exist', ->
+      list.setPackages()
+      expect(fs.existsSync(h.getPackagesPath())).toBe(true)
+
+    it 'creates the list of packages if packages.cson does not exist', ->
+      list.setPackages()
+
+      packages = list.getPackages()
+      expect(packages).toContain(pkg) for pkg in atom.packages.getAvailablePackageNames()
+
+
+    it 'does not update the packages.cson if it does exist', ->
+      h.createPackages({'packages': []})
+
+      list.setPackages()
+
+      expect(list.getPackages()).toEqual([])

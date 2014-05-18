@@ -2,6 +2,8 @@
 # Copyright (c) 2014 by Lifted Studios. All Rights Reserved.
 #
 
+fs = require 'fs'
+
 {BufferedProcess} = require 'atom'
 
 PackageList = require './package-list'
@@ -26,6 +28,11 @@ class PackageSync
   createPackageList: ->
     console.log('Create package list')
     new PackageList().setPackages()
+
+  # Public: Opens the package list.
+  openPackageList: ->
+    console.log('Open package list')
+    atom.workspace.open(PackageList.getPackageListPath())
 
   # Public: Installs any packages that are missing from the `packages.cson` configuration file.
   sync: ->

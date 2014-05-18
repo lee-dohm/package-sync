@@ -3,6 +3,7 @@
 ## **unreleased**
 
 * Added a command to create an initial package list: `package-sync:create-package-list`
+* Added a command to open the package list: `package-sync:open-package-list`
 
 ## **v0.0.4** &mdash; *Released: 17 May 2014*
 

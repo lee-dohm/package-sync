@@ -13,27 +13,24 @@ path = require 'path'
 # This class has no events.
 module.exports =
 class PackageList
-  # Public: Creates a new instance of the `PackageList` class.
-  constructor: ->
-    @configDirPath = atom.getConfigDirPath()
-
   # Public: Gets the list of packages that the user wants synchronized.
   #
   # Returns an {Array} containing the package names.
   getPackages: ->
-    if fs.existsSync(@getConfigPath())
-      obj = CSON.readFileSync(@getConfigPath())
+    if fs.existsSync(PackageList.getPackageListPath())
+      obj = CSON.readFileSync(PackageList.getPackageListPath())
       obj['packages']
     else
       []
 
   # Public: Sets the list of packages to the list of available packages.
   setPackages: ->
-    unless fs.existsSync(@getConfigPath())
-      CSON.writeFileSync(@getConfigPath(), {'packages': atom.packages.getAvailablePackageNames()})
+    unless fs.existsSync(PackageList.getPackageListPath())
+      CSON.writeFileSync(PackageList.getPackageListPath(),
+                         {'packages': atom.packages.getAvailablePackageNames()})
 
   # Internal: Gets the path to the package list.
   #
   # Returns a {String} containing the path to the list of available packages.
-  getConfigPath: ->
-    path.join(@configDirPath, 'packages.cson')
+  @getPackageListPath: ->
+    @packageListPath ?= path.join(atom.getConfigDirPath(), 'packages.cson')

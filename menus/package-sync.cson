@@ -5,10 +5,9 @@
     'submenu': [
       'label': 'Package Sync'
       'submenu': [
-        {
-          'command': 'package-sync:create-package-list'
-          'command': 'package-sync:sync'
-        }
+        { 'label': 'Create Package List', 'command': 'package-sync:create-package-list' }
+        { 'label': 'Open Package List', 'command': 'package-sync:open-package-list' }
+        { 'label': 'Sync Packages', 'command': 'package-sync:sync' }
       ]
     ]
   }

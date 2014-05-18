@@ -16,6 +16,10 @@ module.exports =
       loadModule()
       packageSync.createPackageList()
 
+    atom.workspaceView.command 'package-sync:open-package-list', ->
+      loadModule()
+      packageSync.openPackageList()
+
     atom.workspaceView.command 'package-sync:sync', ->
       loadModule()
       packageSync.sync()

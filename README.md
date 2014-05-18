@@ -2,13 +2,25 @@
 
 # Package Sync for Atom
 
-Synchronizes packages installed between computers.
+Synchronizes packages installed between computers by installing the packages listed in a configuration file.
 
 ## Use
 
-Package Sync reads `~/.atom/packages.cson` (which at this point must be hand generated and maintained), compares what is in there to the list of available packages and installs any packages that it finds are missing.
+Package Sync reads `~/.atom/packages.cson`, compares what is in there to the list of available packages and installs any packages that it finds are missing.
 
-Package Sync can be activated from the `Packages > Package Sync > Sync` menu item, from the "Package Sync: Sync" entry in the command palette, or the `package-sync:sync` command can be mapped to a key for easier activation.
+### Creating the Package List
+
+You can create the initial package list from the packages you have installed by using the `Create Package List` command. It will include all packages you currently have installed in the `~/.atom/packages` directory. The package list can be edited from there if you wish to add or remove any packages from the list.
+
+Calling `Create Package List` will *not* overwrite a pre-existing package list. If you want to start over, you have to manually delete `~/atom/packages.cson` and then you can call `Create Package List` to create it anew.
+
+### Editing the Package List
+
+You can edit the package list at any time by opening it with the `Open Package List` command. It will open the `~/.atom/packages.cson` file in a new Atom buffer.
+
+### Synchronizing your Packages
+
+Once you have the package list set the way you want, any time you wish to ensure that you have all of your required packages, you can execute the `Sync` command.
 
 ## Configuration
 
@@ -23,6 +35,14 @@ The `packages.cson` file follows the format:
 ```
 
 Where the contents of the array is a list of packages to ensure are installed.
+
+### Keymap
+
+There are no keys mapped in this package. The following commands are available for you to map to keys of your choosing:
+
+* `package-sync:create-package-list`
+* `package-sync:open-package-list`
+* `package-sync:sync`
 
 ## Copyright
 

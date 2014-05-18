@@ -1,7 +1,7 @@
 {
   "name": "package-sync",
   "main": "./lib/index",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Synchronizes packages installed between computers",
   "activationEvents": [
     "package-sync:sync"

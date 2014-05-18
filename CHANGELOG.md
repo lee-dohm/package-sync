@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.1.0** &mdash; *Released: 18 May 2014*
+
+* [#3](https://github.com/lee-dohm/package-sync/issues/3) - Display progress messages in the status bar as packages are being installed
+
 ## **v0.0.6** &mdash; *Released: 17 May 2014*
 
 * Fixed package not loading until you do a sync
@@ -11,4 +15,4 @@
 
 ## **v0.0.4** &mdash; *Released: 17 May 2014*
 
-* Change to install only one package at a time
+* [#2](https://github.com/lee-dohm/package-sync/issues/2) - Change to install only one package at a time

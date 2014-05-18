@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.0.6** &mdash; *Released: 17 May 2014*
+
+* Fixed package not loading until you do a sync
+
 ## **v0.0.5** &mdash; *Released: 17 May 2014*
 
 * Added a command to create an initial package list: `package-sync:create-package-list`

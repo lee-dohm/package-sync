@@ -3,9 +3,6 @@
   "main": "./lib/index",
   "version": "0.0.5",
   "description": "Synchronizes packages installed between computers",
-  "activationEvents": [
-    "package-sync:sync"
-  ],
   "repository": "https://github.com/lee-dohm/package-sync",
   "license": "MIT",
   "engines": {

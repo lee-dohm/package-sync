@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.1.1** &mdash; *Released: 19 June 2014*
+
+* [#6](https://github.com/lee-dohm/package-sync/issues/3) - Now excludes pre-installed packages when creating a package list
+
 ## **v0.1.0** &mdash; *Released: 18 May 2014*
 
 * [#3](https://github.com/lee-dohm/package-sync/issues/3) - Display progress messages in the status bar as packages are being installed

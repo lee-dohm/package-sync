@@ -12,14 +12,14 @@ loadModule = ->
 
 module.exports =
   activate: ->
-    atom.workspaceView.command 'package-sync:create-package-list', ->
+    atom.commands.add 'atom-workspace', 'package-sync:create-package-list', ->
       loadModule()
       packageSync.createPackageList()
 
-    atom.workspaceView.command 'package-sync:open-package-list', ->
+    atom.commands.add 'atom-workspace', 'package-sync:open-package-list', ->
       loadModule()
       packageSync.openPackageList()
 
-    atom.workspaceView.command 'package-sync:sync', ->
+    atom.commands.add 'atom-workspace', 'package-sync:sync', ->
       loadModule()
       packageSync.sync()

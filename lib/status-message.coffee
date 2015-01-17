@@ -13,13 +13,12 @@ class StatusMessage
   # message - A {String} containing the message to display.
   constructor: (message) ->
     @statusBar = document.querySelector('status-bar')
-
-    if @statusBar?
-      @node = document.createElement('div')
-      @node.classList.add('inline-block')
+    if @statusBar
+      @item = document.createElement('div')
+      @item.classList.add('inline-block')
       @setText(message)
 
-      @tile = @statusBar.addLeftTile(item: @node)
+      @tile = @statusBar.addLeftTile({@item})
 
   # Public: Removes the message from the status bar.
   remove: ->
@@ -29,4 +28,4 @@ class StatusMessage
   #
   # text - A {String} containing the new message to display.
   setText: (text) ->
-    @node.innerHTML = text if @statusBar?
+    @item.innerHTML = text if @statusBar

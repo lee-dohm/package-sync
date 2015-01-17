@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.1.2** &mdash; *Released: 17 January 2015*
+
+* Fixed deprecations
+
 ## **v0.1.1** &mdash; *Released: 19 June 2014*
 
 * [#6](https://github.com/lee-dohm/package-sync/issues/3) - Now excludes pre-installed packages when creating a package list

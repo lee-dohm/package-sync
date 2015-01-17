@@ -4,10 +4,6 @@
 
 Synchronizes packages installed between computers by installing the packages listed in a configuration file.
 
-## DEPRECATION NOTICE
-
-This package is deprecated in favor of the new (as of v0.101.0) `apm stars --install` functionality.
-
 ## Use
 
 Package Sync reads `~/.atom/packages.cson`, compares what is in there to the list of available packages and installs any packages that it finds are missing.

@@ -2,52 +2,42 @@
 # Copyright (c) 2014 by Lifted Studios. All Rights Reserved.
 #
 
-{$$, WorkspaceView} = require 'atom'
-
 StatusMessage = require '../lib/status-message'
 
 describe 'StatusMessage', ->
-  [statusBar, statusPanel] = []
+  [statusBar] = []
 
   beforeEach ->
-    atom.workspaceView = new WorkspaceView
-    atom.workspace = atom.workspaceView.model
-    atom.workspaceView.simulateDomAttachment()
+    workspaceElement = atom.views.getView(atom.workspace)
+    jasmine.attachToDOM(workspaceElement)
 
-    statusPanel = {
-      element: {
-        lastChild: {
-          innerHTML: null
-        }
+    waitsForPromise -> atom.packages.activatePackage('status-bar')
 
-        removeChild: (obj) ->
-      }
-    }
-
-    statusBar = {
-      appendLeft: (obj) ->
-    }
-
-    atom.workspaceView.statusBar = statusBar
-    spyOn(statusBar, 'appendLeft').andReturn(statusPanel)
-    spyOn(statusPanel.element, 'removeChild')
+    runs ->
+      statusBar = document.querySelector 'status-bar'
 
   it 'displays a message in the status bar', ->
-    new StatusMessage('Message')
+    spyOn(statusBar, 'addLeftTile')
 
-    expect(statusBar.appendLeft.calls[0].args[0]).toMatch('Message')
+    message = new StatusMessage('Message')
+
+    expect(statusBar.addLeftTile).toHaveBeenCalled()
 
   it 'does not throw if there is no status bar', ->
+    atom.packages.deactivatePackage('status-bar')
+
     new StatusMessage('Message')
 
   it 'removes the message', ->
     message = new StatusMessage('Message')
+    tile = message.tile
+    spyOn(tile, 'destroy')
     message.remove()
 
-    expect(statusPanel.element.removeChild).toHaveBeenCalledWith(statusPanel.element.lastChild)
+    expect(tile.destroy).toHaveBeenCalled()
 
   it 'updates the message', ->
     message = new StatusMessage('Message')
     message.setText('Something else')
 
-    expect(statusPanel.element.lastChild.innerHTML).toEqual('Something else')
+    expect(message.item.innerHTML).toEqual('Something else')

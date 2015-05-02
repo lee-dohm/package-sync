@@ -1,7 +1,0 @@
---name "Package Sync"
---title "Package Sync Documentation"
---internal
---quiet
-./lib
--
-LICENSE.md

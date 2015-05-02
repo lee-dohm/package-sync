@@ -1,19 +1,20 @@
 {
   "name": "package-sync",
+  "author": "Lee Dohm <lee@lee-dohm.com>",
   "main": "./lib/index",
   "version": "0.1.2",
   "description": "Synchronizes packages installed between computers",
+  "keywords": [
+    "package",
+    "installation",
+    "synchronization"
+  ],
   "repository": "https://github.com/lee-dohm/package-sync",
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">=0.174.0 <2.0.0"
   },
   "dependencies": {
-    "season": "~1.0"
-  },
-  "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-coffeelint": "0.0.10",
-    "grunt-shell": "^0.7.0"
+    "season": "^5.2.0"
   }
 }

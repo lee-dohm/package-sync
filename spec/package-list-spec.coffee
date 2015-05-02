@@ -42,7 +42,9 @@ describe 'PackageList', ->
       list.setPackages()
 
       packages = list.getPackages()
-      expect(packages).toContain(pkg) for pkg in atom.packages.getAvailablePackageNames() when not atom.packages.isBundledPackage(pkg)
+      available = atom.packages.getAvailablePackageNames()
+      for pkg in available when not atom.packages.isBundledPackage(pkg)
+        expect(packages).toContain(pkg)
 
 
     it 'does not update the packages.cson if it does exist', ->

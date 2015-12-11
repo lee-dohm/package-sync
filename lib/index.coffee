@@ -23,3 +23,8 @@ module.exports =
     atom.commands.add 'atom-workspace', 'package-sync:sync', ->
       loadModule()
       packageSync.sync()
+
+  config:
+    forceOverwrite:
+      type: 'boolean'
+      default: false

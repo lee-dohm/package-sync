@@ -1,7 +1,3 @@
-#
-# Copyright (c) 2014 by Lifted Studios. All Rights Reserved.
-#
-
 StatusMessage = require '../lib/status-message'
 
 describe 'StatusMessage', ->

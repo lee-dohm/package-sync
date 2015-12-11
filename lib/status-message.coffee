@@ -1,7 +1,3 @@
-#
-# Copyright (c) 2014 by Lifted Studios. All Rights Reserved.
-#
-
 # Public: Displays a message in the status bar.
 module.exports =
 class StatusMessage

@@ -1,7 +1,3 @@
-#
-# Copyright (c) 2014 by Lifted Studios. All Rights Reserved.
-#
-
 fs = require 'fs'
 
 {BufferedProcess} = require 'atom'

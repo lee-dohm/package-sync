@@ -38,6 +38,10 @@ The `packages.cson` file follows the format:
 
 Where the contents of the array is a list of packages to ensure are installed.
 
+### Configuration
+
+* `forceOverwrite` &mdash; Forces the `create-package-list` command to overwrite the `packages.cson` if it exists
+
 ### Commands
 
 * `package-sync:create-package-list` &mdash; Creates the `~/.atom/packages.cson` file if it does not already exist

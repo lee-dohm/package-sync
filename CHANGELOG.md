@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v1.0.0** &mdash; *Released: 10 December 2015*
+
+* Add `forceOverwrite` configuration option to allow for overwriting the `packages.cson` even if it already exists
+
 ## **v0.2.0** &mdash; *Released: 2 May 2015*
 
 * Clean up code in preparation for Deprecation Day

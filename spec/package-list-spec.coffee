@@ -53,3 +53,16 @@ describe 'PackageList', ->
       list.setPackages()
 
       expect(list.getPackages()).toEqual([])
+
+    it 'create the packages.cson when the packages.cson exists and forceOverwrite is true', ->
+      h.createPackages({'packages': []})
+
+      atom.config.set('package-sync.forceOverwrite', true)
+
+      list.setPackages()
+
+      packages = list.getPackages()
+
+      available = atom.packages.getAvailablePackageNames()
+      for pkg in available when not atom.packages.isBundledPackage(pkg)
+        expect(packages).toContain(pkg)

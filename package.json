@@ -2,7 +2,7 @@
   "name": "package-sync",
   "author": "Lee Dohm <lee@lee-dohm.com>",
   "main": "./lib/index",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Synchronizes packages installed between computers",
   "keywords": [
     "package",

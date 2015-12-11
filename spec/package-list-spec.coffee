@@ -34,35 +34,49 @@ describe 'PackageList', ->
       expect(list.getPackages()).toEqual(['foo', 'bar', 'baz'])
 
   describe 'setPackages', ->
-    it 'creates the packages.cson if it does not exist', ->
-      list.setPackages()
-      expect(fs.existsSync(h.getPackagesPath())).toBe(true)
+    describe 'when forceOverwrite is set to false', ->
+      beforeEach ->
+        atom.config.set('package-sync.forceOverwrite', false)
 
-    it 'creates the list of packages if packages.cson does not exist', ->
-      list.setPackages()
+      it 'creates the packages.cson if it does not exist', ->
+        list.setPackages()
+        expect(fs.existsSync(h.getPackagesPath())).toBe(true)
 
-      packages = list.getPackages()
-      available = atom.packages.getAvailablePackageNames()
-      for pkg in available when not atom.packages.isBundledPackage(pkg)
-        expect(packages).toContain(pkg)
+      it 'creates the list of packages if packages.cson does not exist', ->
+        list.setPackages()
+
+        packages = list.getPackages()
+        available = atom.packages.getAvailablePackageNames()
+        for pkg in available when not atom.packages.isBundledPackage(pkg)
+          expect(packages).toContain(pkg)
 
 
-    it 'does not update the packages.cson if it does exist', ->
-      h.createPackages({'packages': []})
+      it 'does not update the packages.cson if it does exist', ->
+        h.createPackages({'packages': []})
 
-      list.setPackages()
+        list.setPackages()
 
-      expect(list.getPackages()).toEqual([])
+        expect(list.getPackages()).toEqual([])
 
-    it 'create the packages.cson when the packages.cson exists and forceOverwrite is true', ->
-      h.createPackages({'packages': []})
+    describe 'when forceOverwrite is set to true', ->
+      beforeEach ->
+        atom.config.set('package-sync.forceOverwrite', true)
 
-      atom.config.set('package-sync.forceOverwrite', true)
+      it 'creates the packages.cson if it does not exist', ->
+        list.setPackages()
+        expect(fs.existsSync(h.getPackagesPath())).toBe(true)
 
-      list.setPackages()
+      it 'creates the list of packages if packages.cson does not exist', ->
+        list.setPackages()
 
-      packages = list.getPackages()
+        packages = list.getPackages()
+        available = atom.packages.getAvailablePackageNames()
+        for pkg in available when not atom.packages.isBundledPackage(pkg)
+          expect(packages).toContain(pkg)
 
-      available = atom.packages.getAvailablePackageNames()
-      for pkg in available when not atom.packages.isBundledPackage(pkg)
-        expect(packages).toContain(pkg)
+      it 'updates the packages.cson if it does exist', ->
+        h.createPackages({'packages': []})
+
+        list.setPackages()
+
+        expect(list.getPackages()).not.toEqual([])

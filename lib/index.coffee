@@ -26,5 +26,7 @@ module.exports =
 
   config:
     forceOverwrite:
+      title: 'Overwrite packages.cson'
+      description: 'Overwrite packages.cson even when it is present.'
       type: 'boolean'
       default: false

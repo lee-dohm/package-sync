@@ -30,9 +30,11 @@ describe 'PackageList', ->
       expect(list.getPackages()).toEqual(['foo', 'bar', 'baz'])
 
   describe 'setPackages', ->
+    beforeEach ->
+      spyOn(atom.packages, 'getAvailablePackageNames').andReturn(['foo', 'bar', 'baz'])
+
     describe 'when forceOverwrite is set to false', ->
       beforeEach ->
-        spyOn(atom.packages, 'getAvailablePackageNames').andReturn(['foo', 'bar', 'baz'])
         atom.config.set('package-sync.forceOverwrite', false)
 
       it 'creates the packages.cson if it does not exist', ->

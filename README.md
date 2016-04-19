@@ -40,6 +40,7 @@ Where the contents of the array is a list of packages to ensure are installed.
 
 ### Configuration
 
+* `createOnChange` &mdash; Create the package list when packages are installed or removed via the Atom settings
 * `forceOverwrite` &mdash; Forces the `create-package-list` command to overwrite the `packages.cson` if it exists
 
 ### Commands

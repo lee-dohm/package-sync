@@ -20,14 +20,6 @@ module.exports =
       loadModule()
       packageSync.sync()
 
-    atom.packages.onDidLoadPackage ->
-      loadModule()
-      packageSync.createPackageList()
-
-    atom.packages.onDidUnloadPackage ->
-      loadModule()
-      packageSync.createPackageList()
-
   config:
     forceOverwrite:
       title: 'Overwrite packages.cson'

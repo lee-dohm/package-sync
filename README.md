@@ -40,7 +40,8 @@ Where the contents of the array is a list of packages to ensure are installed.
 
 ### Configuration
 
-* `forceOverwrite` &mdash; Forces the `create-package-list` command to overwrite the `packages.cson` if it exists
+* `createOnChange` &mdash; Create the package list when packages are installed or removed via the Atom settings. You must restart Atom after installing Package Sync for this setting to take effect, and it works best when paired with the `forceOverwrite` setting.
+* `forceOverwrite` &mdash; Forces the `create-package-list` command to overwrite the `packages.cson` if it exists.
 
 ### Commands
 

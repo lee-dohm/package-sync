@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v1.1.0** &mdash; *Released: 24 April 2016*
+
+* [PR #21](https://github.com/lee-dohm/package-sync/pull/21) by [@jbhannah](https://github.com/jbhannah) - Create package list when packages are installed or removed
+
 ## **v1.0.0** &mdash; *Released: 10 December 2015*
 
 * Add `forceOverwrite` configuration option to allow for overwriting the `packages.cson` even if it already exists

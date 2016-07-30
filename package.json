@@ -12,9 +12,29 @@
   "repository": "https://github.com/lee-dohm/package-sync",
   "license": "MIT",
   "engines": {
-    "atom": ">=0.174.0 <2.0.0"
+    "atom": ">=1.8.0 <2.0.0"
   },
   "dependencies": {
+    "etch": "^0.6.0",
     "season": "^5.2.0"
+  },
+  "devDependencies": {
+    "atom-mocha-test-runner": "0.2.1",
+    "chai": "^3.5.0"
+  },
+  "atomTestRunner": "./spec/runner.js",
+  "configSchema": {
+    "createOnChange": {
+      "title": "Create on change",
+      "description": "Create package list when packages are created or removed.",
+      "type": "boolean",
+      "default": false
+    },
+    "forceOverwrite": {
+      "title": "Overwrite `packages.cson`",
+      "description": "Overwrite `packages.cson` even when it is present.",
+      "type": "boolean",
+      "default": false
+    }
   }
 }

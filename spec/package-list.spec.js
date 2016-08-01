@@ -144,4 +144,12 @@ describe('PackageList', function () {
       })
     })
   })
+
+  describe('getPath', function () {
+    it('returns the path that was given', function () {
+      let packageList = new PackageList('test.txt')
+
+      expect(packageList.getPath()).to.equal('test.txt')
+    })
+  })
 })

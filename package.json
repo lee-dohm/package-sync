@@ -1,7 +1,7 @@
 {
   "name": "package-sync",
   "author": "Lee Dohm <lee@lee-dohm.com>",
-  "main": "./lib/index",
+  "main": "./lib/main",
   "version": "1.1.0",
   "description": "Synchronizes packages installed between computers",
   "keywords": [

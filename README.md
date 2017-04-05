@@ -6,9 +6,11 @@
 
 Synchronizes packages installed between computers by installing the packages listed in a configuration file.
 
-## Usage
+## Use
 
 Package Sync reads `~/.atom/packages.cson`, compares what is in there to the list of available packages and installs any packages that it finds are missing.
+
+To execute any of the commands listed below, you can use [Atom's Command Palette](http://flight-manual.atom.io/getting-started/sections/atom-basics/#command-palette). Additionally, you can [create keybindings](http://flight-manual.atom.io/using-atom/sections/basic-customization/#customizing-keybindings) for them if you like.
 
 **Creating the Package List**
 

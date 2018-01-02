@@ -98,6 +98,7 @@ export default class PackageSync {
 
   installPackages(packages: string[]): void {
     this.packagesToInstall.push(...packages)
+    this.installPackage()
   }
 
   setMessageTimeout(timeout: number): void {

@@ -12,9 +12,48 @@
   "repository": "https://github.com/lee-dohm/package-sync",
   "license": "MIT",
   "engines": {
-    "atom": ">=0.174.0 <2.0.0"
+    "atom": ">=1.23.1 <2.0.0"
   },
   "dependencies": {
-    "season": "^5.2.0"
+    "atom-ts-transpiler": "^1.4.0",
+    "season": "^5.2.0",
+    "typescript": "^2.6.2",
+    "@types/atom": "^1.23.0",
+    "@types/node": "^8.5.2"
+  },
+  "devDependencies": {
+    "atom-mocha-test-runner": "^1.2.0",
+    "chai": "^4.1.2"
+  },
+  "atomTestRunner": "atom-mocha-test-runner",
+  "atomTranspilers": [
+    {
+      "transpiler": "atom-ts-transpiler",
+      "glob": "{!(node_modules)/**/,}*.ts?(x)",
+      "options": {
+        "compilerOptions": {
+          "target": "es5",
+          "module": "commonjs",
+          "strict": true,
+          "moduleResolution": "node"
+        },
+        "cacheKeyFiles": [],
+        "verbose": false
+      }
+    }
+  ],
+  "configSchema": {
+    "forceOverwrite": {
+      "title": "Overwrite packages list",
+      "description": "Overwrite packages list even when it is present",
+      "type": "boolean",
+      "default": false
+    },
+    "createOnChange": {
+      "title": "Create on change",
+      "description": "Create packages list when packages or themes are installed or removed",
+      "type": "boolean",
+      "default": false
+    }
   }
 }

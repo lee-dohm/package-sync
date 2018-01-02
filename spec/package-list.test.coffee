@@ -7,6 +7,8 @@ PackageList = require '../lib/package-list'
 
 h = require './helpers'
 
+expect = chai.expect
+
 describe 'PackageList', ->
   list = null
 

@@ -59,6 +59,13 @@
       "default": false
     }
   },
+  "consumedServices": {
+    "atom-ide-busy-signal": {
+      "versions": {
+        "0.1.0": "consumeBusySignal"
+      }
+    }
+  },
   "scripts": {
     "debug": "atom-transpiler-debug-tool"
   }

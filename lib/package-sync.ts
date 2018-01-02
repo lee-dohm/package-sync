@@ -1,25 +1,24 @@
+/// <reference path="./busy-signal" />
+
 import * as fs from 'fs'
 
 import {BufferedProcess} from 'atom'
+import {BusyMessage, BusySignalService} from 'busy-signal'
 
 import PackageList from './package-list'
-import StatusMessage from './status-message'
 
 export default class PackageSync {
   readonly apmPath = atom.packages.getApmPath()
-  readonly longMessageTimeout = 15000
-  readonly shortMessageTimeout = 1000
 
+  busyMessage: BusyMessage
+  busySignal: BusySignalService | null
   currentInstall: BufferedProcess | null
-  message: StatusMessage | null
   packagesToInstall: string[]
-  timeout: NodeJS.Timer | null
 
   constructor() {
+    this.busySignal = null
     this.currentInstall = null
-    this.message = null
     this.packagesToInstall = []
-    this.timeout = null
   }
 
   /**
@@ -41,28 +40,14 @@ export default class PackageSync {
   /**
    * Syncs the package list by installing any missing packages.
    */
-  sync(): void {
+  sync(busySignal: BusySignalService | null): void {
+    if (busySignal) {
+      this.busySignal = busySignal
+      this.busyMessage = this.busySignal.reportBusy('Starting package sync', {revealTooltip: true})
+    }
+
     let missing = this.getMissingPackages()
     this.installPackages(missing)
-  }
-
-  /**
-   * Displays the `message` for the given `timeout` in milliseconds or indefinitely.
-   */
-  displayMessage(message: string, timeout?: number): void {
-    if (this.timeout) {
-      clearTimeout(this.timeout)
-    }
-
-    if (this.message) {
-      this.message.setText(message)
-    } else {
-      this.message = new StatusMessage(message)
-    }
-
-    if (timeout) {
-      this.setMessageTimeout(timeout)
-    }
   }
 
   /**
@@ -72,21 +57,13 @@ export default class PackageSync {
    * `packagesToInstall` list.
    */
   executeApm(pkg: string): void {
-    this.displayMessage(`Installing ${pkg}`)
-
     let command = this.apmPath
     let args = ['install', pkg]
     let stdout = (output: string) => {}
     let stderr = (output: string) => {}
     let exit = (exitCode: number) => {
-      if (exitCode === 0) {
-        if (this.packagesToInstall.length > 0) {
-          this.displayMessage(`${pkg} installed!`, this.shortMessageTimeout)
-        } else {
-          this.displayMessage('Package sync complete!', this.longMessageTimeout)
-        }
-      } else {
-        this.displayMessage(`An error occurred installing ${pkg}`, this.longMessageTimeout)
+      if (exitCode !== 0) {
+        this.busyMessage.setTitle(`An error occurred installing ${pkg}`)
       }
 
       this.currentInstall = null
@@ -118,7 +95,14 @@ export default class PackageSync {
     let nextPackage = this.packagesToInstall.shift()
 
     if (nextPackage) {
+      if (this.busyMessage) {
+        this.busyMessage.setTitle(`Installing ${nextPackage}`)
+      }
+
       this.executeApm(nextPackage)
+    } else {
+      this.busyMessage.dispose()
+      this.busySignal = null
     }
   }
 
@@ -128,21 +112,5 @@ export default class PackageSync {
   installPackages(packages: string[]): void {
     this.packagesToInstall.push(...packages)
     this.installPackage()
-  }
-
-  /**
-   * Sets up a timeout for the currently displayed message.
-   */
-  setMessageTimeout(timeout: number): void {
-    if (this.timeout) {
-      clearTimeout(this.timeout)
-    }
-
-    this.timeout = setTimeout(() => {
-      if (this.message) {
-        this.message.remove()
-        this.message = null
-      }
-    }, timeout)
   }
 }

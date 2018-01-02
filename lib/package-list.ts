@@ -25,8 +25,9 @@ export default class PackageList {
   setPackages () {
     if (atom.config.get('package-sync.forceOverwrite') || !fs.existsSync(PackageList.getPackageListPath())) {
       let available = atom.packages.getAvailablePackageNames()
-      let names = available.filter((name: string) => { !atom.packages.isBundledPackage(name) })
-      CSON.writeFileSync(PackageList.getPackageListPath(), {'packages': names})
+      let names = available.filter((name: string) => { return !atom.packages.isBundledPackage(name) })
+
+      CSON.writeFileSync(PackageList.getPackageListPath(), {packages: names})
     }
   }
 }

@@ -14,7 +14,7 @@ export default class StatusMessage {
    * If the status bar does not exist, no message is displayed and no error
    * occurs.
    */
-  constructor (message: string) {
+  constructor(message: string) {
     this.statusBar = document.querySelector('status-bar') as StatusBar
 
     if (this.statusBar) {
@@ -29,7 +29,7 @@ export default class StatusMessage {
   /**
    * Removes the message from the status bar.
    */
-  remove () {
+  remove(): void {
     if (this.tile) {
       this.tile.destroy()
     }
@@ -38,7 +38,7 @@ export default class StatusMessage {
   /**
    * Updates the text of the message.
    */
-  setText (text: string) {
+  setText(text: string): void {
     if (this.statusBar) {
       this.item.innerHTML = text
     }

@@ -15,27 +15,27 @@ export default class PackageSync {
   packagesToInstall: string[]
   timeout: NodeJS.Timer | null
 
-  constructor () {
+  constructor() {
     this.currentInstall = null
     this.message = null
     this.packagesToInstall = []
     this.timeout = null
   }
 
-  createPackageList () {
+  createPackageList(): void {
     new PackageList().setPackages()
   }
 
-  openPackageList () {
+  openPackageList(): void {
     atom.workspace.open(PackageList.getPackageListPath())
   }
 
-  sync () {
+  sync(): void {
     let missing = this.getMissingPackages()
     this.installPackages(missing)
   }
 
-  displayMessage (message: string, timeout?: number) {
+  displayMessage(message: string, timeout?: number): void {
     if (this.timeout) {
       clearTimeout(this.timeout)
     }
@@ -51,7 +51,7 @@ export default class PackageSync {
     }
   }
 
-  executeApm (pkg: string) {
+  executeApm(pkg: string): void {
     this.displayMessage(`Installing ${pkg}`)
 
     let command = this.apmPath
@@ -76,7 +76,7 @@ export default class PackageSync {
     this.currentInstall = new BufferedProcess({command, args, stdout, stderr, exit})
   }
 
-  getMissingPackages () {
+  getMissingPackages(): string[] {
     let list = new PackageList()
     let syncPackages = list.getPackages()
     let availablePackages = atom.packages.getAvailablePackageNames()
@@ -84,7 +84,7 @@ export default class PackageSync {
     return syncPackages.filter((value) => { !(value in availablePackages) })
   }
 
-  installPackage () {
+  installPackage(): void {
     if (this.currentInstall) {
       return
     }
@@ -96,11 +96,11 @@ export default class PackageSync {
     }
   }
 
-  installPackages (packages: string[]) {
+  installPackages(packages: string[]): void {
     this.packagesToInstall.push(...packages)
   }
 
-  setMessageTimeout (timeout: number) {
+  setMessageTimeout(timeout: number): void {
     if (this.timeout) {
       clearTimeout(this.timeout)
     }

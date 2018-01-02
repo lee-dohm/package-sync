@@ -9,11 +9,11 @@ interface PackagesFile {
 export default class PackageList {
   static packageListPath = path.join(atom.getConfigDirPath(), 'packages.cson')
 
-  static getPackageListPath () {
+  static getPackageListPath(): string {
     return this.packageListPath
   }
 
-  getPackages () : string[] {
+  getPackages(): string[] {
     if (fs.existsSync(PackageList.getPackageListPath())) {
       let obj = CSON.readFileSync(PackageList.getPackageListPath()) as PackagesFile
       return obj.packages
@@ -22,7 +22,7 @@ export default class PackageList {
     return []
   }
 
-  setPackages () {
+  setPackages(): void {
     if (atom.config.get('package-sync.forceOverwrite') || !fs.existsSync(PackageList.getPackageListPath())) {
       let available = atom.packages.getAvailablePackageNames()
       let names = available.filter((name: string) => { return !atom.packages.isBundledPackage(name) })

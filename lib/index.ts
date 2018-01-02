@@ -1,6 +1,6 @@
 import PackageSync from './package-sync'
 
-export function activate() {
+export function activate(): void {
   let packageSync = new PackageSync()
 
   atom.commands.add('atom-workspace', 'package-sync:create-package-list', () => {

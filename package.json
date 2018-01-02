@@ -22,10 +22,13 @@
     "@types/node": "^8.5.2"
   },
   "devDependencies": {
+    "@types/atom-mocha-test-runner": "^1.0.2",
+    "@types/chai": "^4.0.10",
     "atom-mocha-test-runner": "^1.2.0",
+    "atom-transpiler-debug-tool": "^1.0.3",
     "chai": "^4.1.2"
   },
-  "atomTestRunner": "atom-mocha-test-runner",
+  "atomTestRunner": "./spec/runner",
   "atomTranspilers": [
     {
       "transpiler": "atom-ts-transpiler",
@@ -55,5 +58,8 @@
       "type": "boolean",
       "default": false
     }
+  },
+  "scripts": {
+    "debug": "atom-transpiler-debug-tool"
   }
 }

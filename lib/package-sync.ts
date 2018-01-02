@@ -25,15 +25,17 @@ export default class PackageSync {
   /**
    * Creates the package list.
    */
-  createPackageList(): void {
-    new PackageList().setPackages()
+  createPackageList(configDir?: string): void {
+    let list = new PackageList(configDir)
+    list.setPackages()
   }
 
   /**
    * Opens the package list in the workspace.
    */
-  openPackageList(): void {
-    atom.workspace.open(PackageList.getPackageListPath())
+  openPackageList(configDir?: string): void {
+    let list = new PackageList(configDir)
+    atom.workspace.open(list.path)
   }
 
   /**
@@ -97,12 +99,12 @@ export default class PackageSync {
   /**
    * Gets the list of missing package names by comparing against the current package list.
    */
-  getMissingPackages(): string[] {
-    let list = new PackageList()
+  getMissingPackages(configDir?: string): string[] {
+    let list = new PackageList(configDir)
     let syncPackages = list.getPackages()
     let availablePackages = atom.packages.getAvailablePackageNames()
 
-    return syncPackages.filter((value) => { !(value in availablePackages) })
+    return syncPackages.filter((value) => { return !(value in availablePackages) })
   }
 
   /**

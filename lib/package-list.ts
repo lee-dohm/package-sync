@@ -10,21 +10,18 @@ interface PackagesFile {
  * Represents the stored package list.
  */
 export default class PackageList {
-  static packageListPath = path.join(atom.getConfigDirPath(), 'packages.cson')
+  path: string
 
-  /**
-   * Gets the path to the stored package list.
-   */
-  static getPackageListPath(): string {
-    return this.packageListPath
+  constructor(configDir = atom.getConfigDirPath()) {
+    this.path = path.join(configDir, 'packages.cson')
   }
 
   /**
    * Gets the packages from the list.
    */
   getPackages(): string[] {
-    if (fs.existsSync(PackageList.getPackageListPath())) {
-      let obj = CSON.readFileSync(PackageList.getPackageListPath()) as PackagesFile
+    if (fs.existsSync(this.path)) {
+      let obj = CSON.readFileSync(this.path) as PackagesFile
       return obj.packages
     }
 
@@ -36,11 +33,11 @@ export default class PackageList {
    * the `forceOverwrite` configuration option is set to `true`.
    */
   setPackages(): void {
-    if (atom.config.get('package-sync.forceOverwrite') || !fs.existsSync(PackageList.getPackageListPath())) {
+    if (atom.config.get('package-sync.forceOverwrite') || !fs.existsSync(this.path)) {
       let available = atom.packages.getAvailablePackageNames()
       let names = available.filter((name: string) => { return !atom.packages.isBundledPackage(name) })
 
-      CSON.writeFileSync(PackageList.getPackageListPath(), {packages: names})
+      CSON.writeFileSync(this.path, {packages: names})
     }
   }
 }

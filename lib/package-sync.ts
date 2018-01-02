@@ -22,19 +22,31 @@ export default class PackageSync {
     this.timeout = null
   }
 
+  /**
+   * Creates the package list.
+   */
   createPackageList(): void {
     new PackageList().setPackages()
   }
 
+  /**
+   * Opens the package list in the workspace.
+   */
   openPackageList(): void {
     atom.workspace.open(PackageList.getPackageListPath())
   }
 
+  /**
+   * Syncs the package list by installing any missing packages.
+   */
   sync(): void {
     let missing = this.getMissingPackages()
     this.installPackages(missing)
   }
 
+  /**
+   * Displays the `message` for the given `timeout` in milliseconds or indefinitely.
+   */
   displayMessage(message: string, timeout?: number): void {
     if (this.timeout) {
       clearTimeout(this.timeout)
@@ -51,6 +63,12 @@ export default class PackageSync {
     }
   }
 
+  /**
+   * Executes apm to install the given package by name.
+   *
+   * When the given package is done installing, it attempts to install the next package in the
+   * `packagesToInstall` list.
+   */
   executeApm(pkg: string): void {
     this.displayMessage(`Installing ${pkg}`)
 
@@ -76,6 +94,9 @@ export default class PackageSync {
     this.currentInstall = new BufferedProcess({command, args, stdout, stderr, exit})
   }
 
+  /**
+   * Gets the list of missing package names by comparing against the current package list.
+   */
   getMissingPackages(): string[] {
     let list = new PackageList()
     let syncPackages = list.getPackages()
@@ -84,6 +105,9 @@ export default class PackageSync {
     return syncPackages.filter((value) => { !(value in availablePackages) })
   }
 
+  /**
+   * Installs the next package in the list, if one exists.
+   */
   installPackage(): void {
     if (this.currentInstall) {
       return
@@ -96,11 +120,17 @@ export default class PackageSync {
     }
   }
 
+  /**
+   * Queues up the given list of packages to be installed and starts the process.
+   */
   installPackages(packages: string[]): void {
     this.packagesToInstall.push(...packages)
     this.installPackage()
   }
 
+  /**
+   * Sets up a timeout for the currently displayed message.
+   */
   setMessageTimeout(timeout: number): void {
     if (this.timeout) {
       clearTimeout(this.timeout)

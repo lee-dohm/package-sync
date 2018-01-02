@@ -1,5 +1,8 @@
 import PackageSync from './package-sync'
 
+/**
+ * Activates the package.
+ */
 export function activate(): void {
   let packageSync = new PackageSync()
 

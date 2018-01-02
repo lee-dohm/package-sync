@@ -55,6 +55,35 @@ Where the contents of the array is a list of packages to ensure are installed.
 
 No keybindings are configured by default for the commands in this package.
 
+## Notes
+
+There are two primary use cases for this package:
+
+1. Ensure minimum set of packages installed
+    * Atom is allowed to have packages installed that are not in the list
+    * Package list is auto-generated once and then mostly manually updated
+1. Ensure that the list of installed packages is kept completely in sync
+    * Must install any missing packages
+    * Must remove any extra packages
+    * Package list is auto-updated when packages are installed or removed
+
+package-sync was originally intended to only satisfy the first scenario. It has since been pressed into service for the second scenario.
+
+### Minimum set of packages
+
+Operations:
+
+* Create package list from installed packages
+* Edit package list by hand
+* Ensure all packages in list are installed by syncing
+
+### Synchronize packages
+
+Operations:
+
+* Automated updating of package list
+* Ensure all packages are in sync by triggering sync
+
 ## Copyright
 
 Copyright &copy; 2014-2016 by [Lee Dohm](http://www.lee-dohm.com), [Lifted Studios](http://www.liftedstudios.com). See the [LICENSE](https://github.com/lee-dohm/package-sync/blob/master/LICENSE.md) for more details.

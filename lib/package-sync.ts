@@ -51,6 +51,16 @@ export default class PackageSync {
   }
 
   /**
+   * Clears the busy message, if one is set.
+   */
+  clearBusyMessage(): void {
+    if (this.busySignal) {
+      this.busyMessage.dispose()
+      this.busySignal = null
+    }
+  }
+
+  /**
    * Executes apm to install the given package by name.
    *
    * When the given package is done installing, it attempts to install the next package in the
@@ -63,7 +73,7 @@ export default class PackageSync {
     let stderr = (output: string) => {}
     let exit = (exitCode: number) => {
       if (exitCode !== 0) {
-        this.busyMessage.setTitle(`An error occurred installing ${pkg}`)
+        this.setBusyMessage(`An error occurred installing ${pkg}`)
       }
 
       this.currentInstall = null
@@ -95,14 +105,10 @@ export default class PackageSync {
     let nextPackage = this.packagesToInstall.shift()
 
     if (nextPackage) {
-      if (this.busyMessage) {
-        this.busyMessage.setTitle(`Installing ${nextPackage}`)
-      }
-
+      this.setBusyMessage(`Installing ${nextPackage}`)
       this.executeApm(nextPackage)
     } else {
-      this.busyMessage.dispose()
-      this.busySignal = null
+      this.clearBusyMessage()
     }
   }
 
@@ -112,5 +118,14 @@ export default class PackageSync {
   installPackages(packages: string[]): void {
     this.packagesToInstall.push(...packages)
     this.installPackage()
+  }
+
+  /**
+   * Updates the busy message, if one is set.
+   */
+  setBusyMessage(message: string): void {
+    if (this.busySignal) {
+      this.busyMessage.setTitle(message)
+    }
   }
 }

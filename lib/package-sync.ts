@@ -8,14 +8,14 @@ import {BusyMessage, BusySignalService} from 'busy-signal'
 import PackageList from './package-list'
 
 export default class PackageSync {
-  readonly apmPath = atom.packages.getApmPath()
+  private readonly apmPath = atom.packages.getApmPath()
 
-  busyMessage: BusyMessage
-  busySignal: BusySignalService | null
-  currentInstall: BufferedProcess | null
-  packagesToInstall: string[]
+  private busyMessage: BusyMessage
+  private busySignal: BusySignalService | null
+  private currentInstall: BufferedProcess | null
+  private packagesToInstall: string[]
 
-  constructor() {
+  public constructor() {
     this.busySignal = null
     this.currentInstall = null
     this.packagesToInstall = []
@@ -24,23 +24,34 @@ export default class PackageSync {
   /**
    * Creates the package list.
    */
-  createPackageList(configDir?: string): void {
+  public createPackageList(configDir?: string): void {
     let list = new PackageList(configDir)
     list.setPackages()
   }
 
   /**
+   * Gets the list of missing package names by comparing against the current package list.
+   */
+  public getMissingPackages(configDir?: string): string[] {
+    let list = new PackageList(configDir)
+    let syncPackages = list.getPackages()
+    let availablePackages = atom.packages.getAvailablePackageNames()
+
+    return syncPackages.filter((value) => { return !(value in availablePackages) })
+  }
+
+  /**
    * Opens the package list in the workspace.
    */
-  openPackageList(configDir?: string): void {
+  public openPackageList(configDir?: string): void {
     let list = new PackageList(configDir)
-    atom.workspace.open(list.path)
+    atom.workspace.open(list.getPath())
   }
 
   /**
    * Syncs the package list by installing any missing packages.
    */
-  sync(busySignal: BusySignalService | null): void {
+  public sync(busySignal: BusySignalService | null): void {
     if (busySignal) {
       this.busySignal = busySignal
       this.busyMessage = this.busySignal.reportBusy('Starting package sync', {revealTooltip: true})
@@ -53,7 +64,7 @@ export default class PackageSync {
   /**
    * Clears the busy message, if one is set.
    */
-  clearBusyMessage(): void {
+  private clearBusyMessage(): void {
     if (this.busySignal) {
       this.busyMessage.dispose()
       this.busySignal = null
@@ -66,7 +77,7 @@ export default class PackageSync {
    * When the given package is done installing, it attempts to install the next package in the
    * `packagesToInstall` list.
    */
-  executeApm(pkg: string): void {
+  private executeApm(pkg: string): void {
     let command = this.apmPath
     let args = ['install', pkg]
     let stdout = (output: string) => {}
@@ -84,20 +95,9 @@ export default class PackageSync {
   }
 
   /**
-   * Gets the list of missing package names by comparing against the current package list.
-   */
-  getMissingPackages(configDir?: string): string[] {
-    let list = new PackageList(configDir)
-    let syncPackages = list.getPackages()
-    let availablePackages = atom.packages.getAvailablePackageNames()
-
-    return syncPackages.filter((value) => { return !(value in availablePackages) })
-  }
-
-  /**
    * Installs the next package in the list, if one exists.
    */
-  installPackage(): void {
+  private installPackage(): void {
     if (this.currentInstall) {
       return
     }
@@ -115,7 +115,7 @@ export default class PackageSync {
   /**
    * Queues up the given list of packages to be installed and starts the process.
    */
-  installPackages(packages: string[]): void {
+  private installPackages(packages: string[]): void {
     this.packagesToInstall.push(...packages)
     this.installPackage()
   }
@@ -123,7 +123,7 @@ export default class PackageSync {
   /**
    * Updates the busy message, if one is set.
    */
-  setBusyMessage(message: string): void {
+  private setBusyMessage(message: string): void {
     if (this.busySignal) {
       this.busyMessage.setTitle(message)
     }

@@ -2,6 +2,9 @@ import * as CSON from 'season'
 import * as fs from 'fs'
 import * as path from 'path'
 
+/**
+ * Information that gets stored in the `packages.cson` file.
+ */
 interface PackagesFile {
   packages: string[]
 }
